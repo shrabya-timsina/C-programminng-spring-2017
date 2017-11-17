@@ -1,0 +1,11 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include "waves.h"
+
+/* main: runs the draw_waves program with specified side_length 
+  and center offsets */
+int main(int argc, char *argv[])
+{
+  draw_waves(500,0.14,0.15, 0.11, 0, 0);  
+  return 0;
+}

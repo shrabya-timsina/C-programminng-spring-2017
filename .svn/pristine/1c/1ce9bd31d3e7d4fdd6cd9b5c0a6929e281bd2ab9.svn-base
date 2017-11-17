@@ -1,0 +1,30 @@
+// struct definitions ==================================
+typedef struct intlist intlist;
+struct intlist {
+    int val;
+    intlist* next;
+};
+
+//problem 1 ============================================
+
+intlist* intlist_new();
+
+int intlist_nth(intlist* xs, unsigned int n);
+
+void intlist_set(intlist* xs, unsigned int n, int val);
+
+intlist* intlist_append(intlist* xs, int val);
+
+intlist* intlist_prepend(intlist* xs, int val);
+
+void intlist_show(intlist* xs);
+
+void intlist_free(intlist* xs);
+
+// problem 1 helper function also used in evidence file
+
+intlist* cons(int fst, intlist*rst);
+
+// problem 2 ============================================
+
+intlist* add_digits(unsigned char base, intlist* ds1, intlist* ds2);

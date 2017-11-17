@@ -1,0 +1,73 @@
+#include "hw5.h"
+#include <stdlib.h>
+#include <stdio.h>
+
+// evidence functions for problem 1 =======================
+void evidence_intlist_new() {
+    intlist* empty_list = intlist_new();
+    printf("\n***** testing Prob 1 : intlist_new *******\n");
+
+    printf("\n expecting an empty list \n");
+    if (!empty_list) {
+        printf("YES, it is an empty list \n");
+    } else {
+        printf("NO, it is not an empty list \n");
+    }
+}
+
+void evidence_intlist_nth() {
+    printf("\n***** testing Prob 1 : intlist_nth (with 0-based indexing) *******\n");
+
+    intlist* newlist = cons(10, cons(11, cons(12, cons(13, NULL))));
+    printf("\n getting item 2 - expecting: 12 -- obtaining: %d", intlist_nth(newlist, 2));
+    intlist_free(newlist);
+
+    newlist = cons(0, cons(3, cons(3, cons(8, cons(9, NULL)))));
+    printf("\n getting item 4 - expecting: 9 -- obtaining: %d", intlist_nth(newlist, 4));
+    intlist_free(newlist);
+
+    newlist = cons(1, cons(7, cons(467, cons(456, NULL))));
+    //printf("\n getting item 6 - expecting: error -- obtaining: %d", intlist_nth(newlist, 6));
+    intlist_free(newlist);
+
+}
+
+void evidence_intlist_set() {
+    
+}
+
+void evidence_intlist_append() {
+    
+}
+
+void evidence_intlist_prepend() {
+    
+}
+
+void evidence_intlist_show() {
+    
+}
+
+// evidence functions for problem 2 =======================
+void evidence_add_digits() {
+    
+}
+
+/* main: run the evidence functions above ======================= */ 
+int main(int argc, char *argv[]) {
+    evidence_intlist_new();
+    evidence_intlist_nth();
+    evidence_intlist_set();
+    evidence_intlist_append();
+    evidence_intlist_prepend();
+    evidence_intlist_show();
+    evidence_add_digits();evidence_intlist_new();
+    evidence_intlist_nth();
+    evidence_intlist_set();
+    evidence_intlist_append();
+    evidence_intlist_prepend();
+    evidence_intlist_show();
+    evidence_add_digits();
+
+
+}

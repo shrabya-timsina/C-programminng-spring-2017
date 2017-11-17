@@ -1,0 +1,130 @@
+/* Shrabya Timsina, shrabya
+ * CS 152, Spring 2017
+ * HW 5 
+ */
+
+#include "hw5.h"
+#include <stdlib.h>
+#include <stdio.h>
+
+// ===> Problem 1: Linked Lists =====================================
+
+intlist* intlist_new() {
+    return NULL;
+}
+
+int intlist_nth(intlist* xs, unsigned int n) {
+
+    int counter = 0;
+    while (xs) {
+        if (counter == n) { 
+            return xs -> val;
+        }
+        counter++;
+        xs = xs -> next;
+    }
+    fprintf(stderr, \
+            "\nintlist_nth: linked list is shorter than given index \n");
+    exit(1);
+}
+
+void intlist_set(intlist* xs, unsigned int n, int val) {
+
+    int counter = 0;
+    while (xs) {
+        if (counter == n) { 
+            xs -> val = val;
+            return;
+        }
+        counter++;
+        xs = xs -> next;
+    }
+    fprintf(stderr, \
+            "intlist_set: linked list is shorter than given index \n");
+    exit(1);
+    
+}
+
+intlist* cons(int fst, intlist*rst) {
+    intlist* newlist = (intlist*) malloc (sizeof(intlist));
+    newlist -> val = fst;
+    newlist -> next = rst;
+    return newlist;
+}
+
+intlist* intlist_append(intlist* xs, int val) {
+
+    intlist* new_tail = cons(val, NULL), *cur = xs;
+    if (xs == NULL) {
+        return new_tail;
+    }
+    while (cur -> next) {
+        cur = cur -> next;
+    }
+    cur -> next = new_tail;
+    return xs;
+}
+
+intlist* intlist_prepend(intlist* xs, int val) {
+     
+    intlist* new_head = cons(val, xs);
+    return new_head;
+}
+
+void intlist_show(intlist* xs) {
+    
+    if (xs == NULL) {
+        printf("empty-intlist");
+        return;
+    }  
+    while (xs -> next) {
+        printf("%d ", xs -> val);
+        xs = xs -> next;
+    }
+    printf("%d", xs -> val);
+}
+
+void intlist_free(intlist* xs) {
+
+    intlist* temp = xs;
+    while (xs) {
+        temp = temp -> next;
+        free(xs);
+        xs = temp;
+    }
+}
+
+// ===> Problem 2: Big Numbers =====================================
+
+intlist* add_digits(unsigned char base, intlist* ds1, intlist* ds2) {
+  
+    intlist* sum_list = NULL, *head = NULL;
+
+    int carry = 0, current_digit_sum;
+    while (ds1 || ds2) {
+        current_digit_sum = carry;
+        if (ds1) {
+            current_digit_sum += ds1 -> val;
+            ds1 = ds1 -> next;
+        }
+        if (ds2) {
+            current_digit_sum += ds2 -> val;
+            ds2 = ds2 -> next;
+        }
+
+        if (current_digit_sum >= base) {
+            carry = 1;
+            current_digit_sum = current_digit_sum % base;
+        } else {
+            carry = 0;
+        }   
+        sum_list = intlist_append(sum_list, current_digit_sum);
+        if (head == NULL) {
+            head = sum_list;
+        }
+    }
+    if (carry == 1) {
+        sum_list = intlist_append(sum_list, 1);
+    }
+    return head; 
+}

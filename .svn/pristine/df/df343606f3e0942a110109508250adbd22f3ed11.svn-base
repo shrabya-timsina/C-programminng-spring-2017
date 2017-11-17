@@ -1,0 +1,23 @@
+board* board_new(unsigned int nrows, unsigned int ncols, enum type type) {
+
+    board* new = (board*) malloc(sizeof(board));
+    new -> nrows = nrows;
+    new -> ncols = ncols;
+    new -> type = type;
+    switch(type) {
+        case CELLS:
+            new -> u.cells = malloc(nrows * sizeof(square*));
+            unsigned int i, j;
+            for (i = 0; i < nrows; i++) {
+                new -> u.cells[i] = malloc(nrows * sizeof(square));
+                for (j = 0; j < ncols; j++) {
+                    new -> u.cells[i][j] = EMPTY;
+                }
+            }
+        case BITS:
+            // beginning of rows kept at reverse order in each number
+        // you should split the thing into 16 pieces or sth
+            new -> u.bits = malloc(nrows * sizeof(square*));
+
+    }
+}
